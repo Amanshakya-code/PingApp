@@ -1,4 +1,4 @@
-package com.example.ping.fragments
+package com.example.ping
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ping.*
-import com.example.ping.models.User
+import com.example.ping.fragments.UserViewHolder
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter
 import com.firebase.ui.firestore.paging.FirestorePagingOptions
 import com.firebase.ui.firestore.paging.LoadingState
@@ -46,7 +45,7 @@ class peopleFragment : Fragment() {
             .build()
         val options = FirestorePagingOptions.Builder<User>()
             .setLifecycleOwner(viewLifecycleOwner)
-            .setQuery(database,config, User::class.java)
+            .setQuery(database,config,User::class.java)
             .build()
         mAdapter = object:FirestorePagingAdapter<User,RecyclerView.ViewHolder>(options){
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -61,7 +60,7 @@ class peopleFragment : Fragment() {
                 if(holder is UserViewHolder)
                 {
                     holder.bind(user = model){ name: String, photo: String, id: String ->
-                        val intent = Intent(requireContext(), ChatActivity::class.java)
+                        val intent = Intent(requireContext(),ChatActivity::class.java)
                         intent.putExtra(UID,id)
                         intent.putExtra(NAME,name)
                         intent.putExtra(IMAGE,photo)

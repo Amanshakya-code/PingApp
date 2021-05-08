@@ -3,15 +3,16 @@ package com.example.ping
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.ping.models.User
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.activity_profileview.*
 
 class profileview : AppCompatActivity() {
 
-    lateinit var currentUserprofile: User
+    lateinit var currentUserprofile:User
     private var mCurrentId:String?=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

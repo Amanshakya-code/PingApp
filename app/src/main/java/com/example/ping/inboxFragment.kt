@@ -1,4 +1,4 @@
-package com.example.ping.fragments
+package com.example.ping
 
 import android.content.Intent
 import androidx.fragment.app.Fragment
@@ -10,8 +10,7 @@ import android.view.ViewGroup
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ping.*
-import com.example.ping.models.Inbox
+import com.example.ping.fragments.ChatViewHolder
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 
@@ -64,7 +63,7 @@ class inboxFragment : Fragment() {
             ) {
 
                 viewHolder.bind(inbox) { name: String, photo: String, id: String ->
-                    val intent = Intent(requireContext(), ChatActivity::class.java)
+                    val intent = Intent(requireContext(),ChatActivity::class.java)
                     intent.putExtra(UID,id)
                     intent.putExtra(NAME,name)
                     intent.putExtra(IMAGE,photo)

@@ -1,4 +1,4 @@
-package com.example.ping.models
+package com.example.ping
 
 import com.google.firebase.firestore.FieldValue
 import java.lang.reflect.Field

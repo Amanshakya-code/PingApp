@@ -3,7 +3,7 @@ package com.example.ping.fragments
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ping.models.Inbox
+import com.example.ping.Inbox
 import com.example.ping.R
 import com.example.ping.formatAsListItem
 

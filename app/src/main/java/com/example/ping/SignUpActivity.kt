@@ -13,9 +13,10 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
-import com.example.ping.models.User
+
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -25,6 +26,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.net.URL
 
 class SignUpActivity : AppCompatActivity() {
 

@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ping.adapter.ChatAdapter
-import com.example.ping.models.Inbox
-import com.example.ping.models.User
 import com.example.ping.network.NotificationData
 import com.example.ping.network.PushNotification
 import com.example.ping.network.RetrofitInstance
@@ -36,8 +34,8 @@ class ChatActivity : AppCompatActivity() {
     private val db: FirebaseDatabase by lazy {
         FirebaseDatabase.getInstance()
     }
-    lateinit var currentUser: User
-    lateinit var friendUser: User
+    lateinit var currentUser:User
+    lateinit var friendUser:User
     private val messages = mutableListOf<ChatEvent>()
     lateinit var chatAdapter: ChatAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
