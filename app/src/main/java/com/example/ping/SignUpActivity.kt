@@ -4,12 +4,17 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
+import android.nfc.NfcAdapter.EXTRA_DATA
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import com.example.ping.models.User
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
@@ -36,6 +41,9 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+        opencamera.setOnClickListener {
+            checkCameraPermission()
+        }
         userImgView.setOnClickListener {
             checkPermissionForImage()
         }
@@ -71,6 +79,17 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkCameraPermission() {
+        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+            //start your work
+            val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(takePhotoIntent, 234)
+        }
+        else{
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA),1234)
+        }
+    }
+
     private fun checkPermissionForImage() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if ((checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
@@ -101,6 +120,7 @@ class SignUpActivity : AppCompatActivity() {
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK && requestCode == 1000)
@@ -111,9 +131,15 @@ class SignUpActivity : AppCompatActivity() {
                 uploadImage(it)
             }
         }
+        if(requestCode == 234)
+        {
+            Log.i("image", "run")
+
+        }
     }
 
     private fun uploadImage(it: Uri) {
+        Toast.makeText(this,"Please wait your data is uploading",Toast.LENGTH_SHORT).show()
         nextBtn.isEnabled = false // no intererruption in uploading the image
         val ref = storage.reference.child("uploads/"+auth.uid.toString())
         val uploadTask = ref.putFile(it)
@@ -126,6 +152,7 @@ class SignUpActivity : AppCompatActivity() {
             }
             return@Continuation ref.downloadUrl
         }).addOnCompleteListener {task->
+            Toast.makeText(this,"There your go :)",Toast.LENGTH_SHORT).show()
             nextBtn.isEnabled = true
             if (task.isSuccessful)
             {
@@ -136,7 +163,7 @@ class SignUpActivity : AppCompatActivity() {
 
             }
         }.addOnFailureListener{
-            Toast.makeText(this,"not able to upload the image",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Not able to upload the image",Toast.LENGTH_SHORT).show()
         }
     }
 }
