@@ -1,4 +1,4 @@
-package com.example.ping
+package com.example.ping.utils
 
 import android.graphics.Rect
 import android.view.View
