@@ -76,21 +76,5 @@
         android:textSize="18sp"
         android:textStyle="normal"
         app:cornerRadius="5dp" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/opencamera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:paddingStart="20dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="10dp"
-        android:text="Take Photo"
-        android:textAllCaps="true"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        android:textStyle="normal"
-        app:cornerRadius="5dp" />
 
 </LinearLayout>

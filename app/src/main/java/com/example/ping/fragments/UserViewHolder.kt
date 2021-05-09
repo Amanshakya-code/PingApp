@@ -4,7 +4,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ping.R
-import com.example.ping.User
+import com.example.ping.models.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item.view.*
 

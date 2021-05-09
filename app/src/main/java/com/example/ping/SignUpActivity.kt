@@ -4,9 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
-import android.nfc.NfcAdapter.EXTRA_DATA
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +14,7 @@ import android.widget.Toast
 
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import com.example.ping.models.User
 
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
@@ -26,7 +25,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import java.net.URL
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -43,9 +41,6 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-        opencamera.setOnClickListener {
-            checkCameraPermission()
-        }
         userImgView.setOnClickListener {
             checkPermissionForImage()
         }
@@ -78,17 +73,6 @@ class SignUpActivity : AppCompatActivity() {
                     Log.i("token",token)
                 })
             }
-        }
-    }
-
-    private fun checkCameraPermission() {
-        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
-            //start your work
-            val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(takePhotoIntent, 234)
-        }
-        else{
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA),1234)
         }
     }
 
