@@ -63,7 +63,7 @@ class SignUpActivity : AppCompatActivity() {
                     // Get new FCM registration token
                     var token = task.result.toString()
 
-                    val user = User(name,downloadURL,downloadURL,auth.uid!!,token)
+                    val user = User(name,downloadURL,downloadURL,auth.uid!!,token,"online")
                     database.collection("users").document(auth.uid!!).set(user).addOnSuccessListener {
                         startActivity(Intent(this,MainActivity::class.java))
                         finish()

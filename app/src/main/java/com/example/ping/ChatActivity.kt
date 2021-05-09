@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ping.adapter.ChatAdapter
 import com.example.ping.models.Inbox
@@ -45,7 +46,6 @@ class ChatActivity : AppCompatActivity() {
         EmojiManager.install(GoogleEmojiProvider())
         setContentView(R.layout.activity_chat)
 
-
         friendid = intent.getStringExtra(UID)
         name = intent.getStringExtra(NAME)
         image = intent.getStringExtra(IMAGE)
@@ -58,7 +58,27 @@ class ChatActivity : AppCompatActivity() {
         }
         FirebaseFirestore.getInstance().collection("users").document(friendid!!).get().addOnSuccessListener {
             friendUser = it.toObject(User::class.java)!!
+
+
         }
+
+
+        FirebaseFirestore.getInstance().collection("users").document(friendid!!).addSnapshotListener { value, error ->
+            error?.let {
+                Log.i("eoo","$it")
+                return@addSnapshotListener
+            }
+            value?.let {
+                if(it.exists()){
+                    val onlineState = it.getString("onlineStatus")
+                    onlinestatus.text = onlineState
+                    Log.i("eoo","$onlineState")
+                }
+            }
+
+        }
+
+
 
         chatAdapter = ChatAdapter(messages,mCurrentId!!)
         msgRv.apply {
@@ -91,6 +111,7 @@ class ChatActivity : AppCompatActivity() {
         updateReadCount()
 
     }
+
     private fun sendNotification(notification:PushNotification) = CoroutineScope(Dispatchers.IO).launch {
         try{
             val response = RetrofitInstance.api.postNotification(notification)
@@ -223,6 +244,26 @@ class ChatActivity : AppCompatActivity() {
             friendId+mCurrentId
         }
     }
+    private fun onlinestatus(status:String){
+
+
+        val reference  =  FirebaseFirestore.getInstance().collection("users").document(mCurrentId!!)
+        var hashMap: HashMap<String, Any> = HashMap<String, Any>()
+        hashMap.put("onlineStatus",status)
+        reference.update(hashMap)
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        onlinestatus("online")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onlinestatus("offline")
+    }
+
 
 
 }
