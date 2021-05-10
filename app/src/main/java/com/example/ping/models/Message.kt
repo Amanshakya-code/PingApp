@@ -15,10 +15,10 @@ data class Message(
         override val combineId:String,
         val type:String = "TEXT",
         val status:Int = 1,
-        val liked:Boolean = false,
+
         override val sendAt: Date = Date()
 ):ChatEvent{
-    constructor():this("","","","","",1,false,Date())
+    constructor():this("","","","","",1,Date())
 }
 
 data class DateHeader(

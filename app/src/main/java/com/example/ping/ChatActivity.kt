@@ -1,6 +1,8 @@
 package com.example.ping
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -41,6 +43,7 @@ class ChatActivity : AppCompatActivity() {
     lateinit var friendUser: User
     private val messages = mutableListOf<ChatEvent>()
     lateinit var chatAdapter: ChatAdapter
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EmojiManager.install(GoogleEmojiProvider())
@@ -61,8 +64,6 @@ class ChatActivity : AppCompatActivity() {
 
 
         }
-
-
         FirebaseFirestore.getInstance().collection("users").document(friendid!!).addSnapshotListener { value, error ->
             error?.let {
                 Log.i("eoo","$it")
@@ -72,13 +73,10 @@ class ChatActivity : AppCompatActivity() {
                 if(it.exists()){
                     val onlineState = it.getString("onlineStatus")
                     onlinestatus.text = onlineState
-                    Log.i("eoo","$onlineState")
                 }
             }
 
         }
-
-
 
         chatAdapter = ChatAdapter(messages,mCurrentId!!)
         msgRv.apply {
@@ -198,7 +196,7 @@ class ChatActivity : AppCompatActivity() {
                     }
 
                     override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                        TODO("Not yet implemented")
+                        Log.i("removed","change")
                     }
 
                     override fun onChildRemoved(snapshot: DataSnapshot) {
@@ -229,15 +227,11 @@ class ChatActivity : AppCompatActivity() {
         chatAdapter.notifyItemInserted(messages.size -1)
         msgRv.scrollToPosition(messages.size-1)
     }
-
-    private fun markasRead(){
-        getInbox(friendid!!,mCurrentId!!).child("count").setValue(0)
-    }
     private fun getInbox(toUser:String,fromUser:String) = db.reference.child("chats/$toUser/$fromUser")
     private fun getMessages(friendId: String) = db.reference.child("messages/${getId(friendId)}")
     private fun getId(friendId:String):String
     {
-        return if(friendId> mCurrentId.toString()){
+        return if(friendId > mCurrentId.toString()){
             mCurrentId + friendId
         }
         else{
@@ -245,15 +239,12 @@ class ChatActivity : AppCompatActivity() {
         }
     }
     private fun onlinestatus(status:String){
-
-
         val reference  =  FirebaseFirestore.getInstance().collection("users").document(mCurrentId!!)
         var hashMap: HashMap<String, Any> = HashMap<String, Any>()
         hashMap.put("onlineStatus",status)
         reference.update(hashMap)
 
     }
-
     override fun onStart() {
         super.onStart()
         onlinestatus("online")
@@ -263,7 +254,4 @@ class ChatActivity : AppCompatActivity() {
         super.onPause()
         onlinestatus("offline")
     }
-
-
-
 }

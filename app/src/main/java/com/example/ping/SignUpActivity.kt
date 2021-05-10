@@ -125,7 +125,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun uploadImage(it: Uri) {
-        Toast.makeText(this,"Please wait your data is uploading",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"Please wait your data is uploading",Toast.LENGTH_LONG).show()
         nextBtn.isEnabled = false // no intererruption in uploading the image
         val ref = storage.reference.child("uploads/"+auth.uid.toString())
         val uploadTask = ref.putFile(it)
