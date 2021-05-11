@@ -32,7 +32,7 @@ class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentU
                 MessageViewHolder(inflate(R.layout.list_item_chat_sent_message))
             }
             DATE_HEADER ->{
-                MessageViewHolder(inflate(R.layout.list_item_date_header))
+                DateViewHolder(inflate(R.layout.list_item_date_header))
             }
             else-> MessageViewHolder(inflate(R.layout.list_item_chat_recv_message))
         }

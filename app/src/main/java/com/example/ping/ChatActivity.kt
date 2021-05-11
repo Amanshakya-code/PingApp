@@ -41,6 +41,7 @@ class ChatActivity : AppCompatActivity() {
     private val db: FirebaseDatabase by lazy {
         FirebaseDatabase.getInstance()
     }
+    private lateinit var listener: ValueEventListener
     private lateinit var keyboardVisibilityHelper: KeyBoardVisibilityUtil
     lateinit var currentUser: User
     lateinit var friendUser: User
@@ -112,6 +113,7 @@ class ChatActivity : AppCompatActivity() {
                     it.clear()
                 }
             }
+
         }
         updateReadCount()
         seenMessage()
@@ -136,6 +138,18 @@ class ChatActivity : AppCompatActivity() {
 
     private fun updateReadCount() {
         getInbox(mCurrentId!!,friendid!!).child("count").setValue(0)
+    }
+
+    private fun updateMessage(msg: Message) {
+        val position = messages.indexOfFirst {
+            when (it) {
+                is Message -> it.msgId == msg.msgId
+                else -> false
+            }
+        }
+        messages[position] = msg
+
+        chatAdapter.notifyItemChanged(position)
     }
 
     private fun sendMessage(msg: String) {
@@ -204,8 +218,12 @@ class ChatActivity : AppCompatActivity() {
                     }
 
                     override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                        Log.i("datachanged","change")
-                        chatAdapter.notifyDataSetChanged()
+                        Log.i("onchild","${snapshot.getValue(Message::class.java)}")
+                        val message = snapshot.getValue(Message::class.java)
+                        if (message != null) {
+                            updateMessage(message)
+                        }
+
                     }
 
                     override fun onChildRemoved(snapshot: DataSnapshot) {
@@ -252,7 +270,6 @@ class ChatActivity : AppCompatActivity() {
         var hashMap: HashMap<String, Any> = HashMap<String, Any>()
         hashMap.put("onlineStatus",status)
         reference.update(hashMap)
-
     }
     override fun onStart() {
         super.onStart()
@@ -266,11 +283,14 @@ class ChatActivity : AppCompatActivity() {
         onlinestatus("offline")
         rootView.viewTreeObserver
                 .addOnGlobalLayoutListener(keyboardVisibilityHelper.visibilityListener)
+        getMessages(friendid!!).removeEventListener(listener)
     }
 
     private fun seenMessage(){
-        getMessages(friendid!!).addValueEventListener(object: ValueEventListener{
+        listener = getMessages(friendid!!).addValueEventListener(object: ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                chatAdapter.notifyDataSetChanged()
+                Log.i("datachanged","datachange")
                 for(snapshot in dataSnapshot.children){
                     val chats = snapshot.getValue(Message::class.java)
                     if (chats != null) {
@@ -284,7 +304,6 @@ class ChatActivity : AppCompatActivity() {
             }
             override fun onCancelled(error: DatabaseError) {}
         })
-
     }
 }
 //simplychange
