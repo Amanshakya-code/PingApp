@@ -266,3 +266,4 @@ class ChatActivity : AppCompatActivity() {
                 .addOnGlobalLayoutListener(keyboardVisibilityHelper.visibilityListener)
     }
 }
+//simplychange
