@@ -12,6 +12,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.list_item_chat_recv_message.view.content
 import kotlinx.android.synthetic.main.list_item_chat_recv_message.view.time
+import kotlinx.android.synthetic.main.list_item_chat_sent_message.view.*
 import kotlinx.android.synthetic.main.list_item_date_header.view.*
 
 class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentUid:String):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -82,6 +83,21 @@ class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentU
                         Log.i("erroe","$e")
                     }
 
+                   try {
+                       if(position == list.size-1){
+                           if(item.status == 2){
+                               messageStatus.text = "Seen"
+                           }
+                           else{
+                               messageStatus.text = "Delivered"
+                           }
+                       }else{
+                           messageStatus.visibility = View.GONE
+                       }
+                   }
+                   catch (e:Exception){
+                       Log.i("SMerror","error = $e")
+                   }
                 }
             }
         }

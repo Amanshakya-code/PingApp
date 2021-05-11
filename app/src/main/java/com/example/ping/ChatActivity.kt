@@ -114,6 +114,7 @@ class ChatActivity : AppCompatActivity() {
             }
         }
         updateReadCount()
+        seenMessage()
 
     }
 
@@ -142,7 +143,7 @@ class ChatActivity : AppCompatActivity() {
         checkNotNull(id){
             "cannot be null"
         }
-        val msgMap = Message(msg,mCurrentId!!,id,getId(friendid!!))
+        val msgMap = Message(msg,mCurrentId!!,id,getId(friendid!!),1)
         getMessages(friendid!!).child(id).setValue(msgMap).addOnSuccessListener {
 
         }
@@ -264,6 +265,27 @@ class ChatActivity : AppCompatActivity() {
         onlinestatus("offline")
         rootView.viewTreeObserver
                 .addOnGlobalLayoutListener(keyboardVisibilityHelper.visibilityListener)
+    }
+
+    private fun seenMessage(){
+        getMessages(friendid!!).addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                Log.i("datachanged","change")
+                for(snapshot in dataSnapshot.children){
+                    val chats = snapshot.getValue(Message::class.java)
+                    if (chats != null) {
+                        if(chats.senderId.equals(friendid) && chats.senderId.equals(mCurrentId)){
+                            var hashMap: HashMap<String, Any> = HashMap<String, Any>()
+                            hashMap.put("status",2)
+                            snapshot.ref.updateChildren(hashMap)
+                        }
+
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
+
     }
 }
 //simplychange

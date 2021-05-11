@@ -13,12 +13,12 @@ data class Message(
         val senderId:String,
         override val msgId:String,
         override val combineId:String,
+        val status:Int,
         val type:String = "TEXT",
-        val status:Int = 1,
 
         override val sendAt: Date = Date()
 ):ChatEvent{
-    constructor():this("","","","","",1,Date())
+    constructor():this("","","","",1,"",Date())
 }
 
 data class DateHeader(
