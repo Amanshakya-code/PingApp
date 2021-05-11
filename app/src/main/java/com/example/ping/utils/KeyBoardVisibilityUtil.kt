@@ -3,7 +3,7 @@ package com.example.ping.utils
 import android.graphics.Rect
 import android.view.View
 
-class keyBoardVisibilityUtil(contentView: View, onKeyboardShown: (Boolean) -> Unit) {
+class KeyBoardVisibilityUtil(contentView: View, onKeyboardShown: (Boolean) -> Unit) {
 
     private var currentKeyboardState: Boolean = false
 

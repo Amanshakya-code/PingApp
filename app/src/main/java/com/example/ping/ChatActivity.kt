@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -14,6 +15,7 @@ import com.example.ping.models.User
 import com.example.ping.network.NotificationData
 import com.example.ping.network.PushNotification
 import com.example.ping.network.RetrofitInstance
+import com.example.ping.utils.KeyBoardVisibilityUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
@@ -39,6 +41,7 @@ class ChatActivity : AppCompatActivity() {
     private val db: FirebaseDatabase by lazy {
         FirebaseDatabase.getInstance()
     }
+    private lateinit var keyboardVisibilityHelper: KeyBoardVisibilityUtil
     lateinit var currentUser: User
     lateinit var friendUser: User
     private val messages = mutableListOf<ChatEvent>()
@@ -53,6 +56,10 @@ class ChatActivity : AppCompatActivity() {
         name = intent.getStringExtra(NAME)
         image = intent.getStringExtra(IMAGE)
         mCurrentId = FirebaseAuth.getInstance().uid!!
+
+        keyboardVisibilityHelper = KeyBoardVisibilityUtil(rootView) {
+            msgRv.scrollToPosition(messages.size - 1)
+        }
 
         FirebaseFirestore.getInstance().collection("users").document(mCurrentId!!).get().addOnSuccessListener {
             currentUser = it.toObject(User::class.java)!!
@@ -248,10 +255,14 @@ class ChatActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         onlinestatus("online")
+        rootView.viewTreeObserver
+                .addOnGlobalLayoutListener(keyboardVisibilityHelper.visibilityListener)
     }
 
     override fun onPause() {
         super.onPause()
         onlinestatus("offline")
+        rootView.viewTreeObserver
+                .addOnGlobalLayoutListener(keyboardVisibilityHelper.visibilityListener)
     }
 }
