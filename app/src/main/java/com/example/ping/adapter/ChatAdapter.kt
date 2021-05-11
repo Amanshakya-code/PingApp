@@ -1,5 +1,6 @@
 package com.example.ping.adapter
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.util.Log
@@ -36,6 +37,7 @@ class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentU
             else-> MessageViewHolder(inflate(R.layout.list_item_chat_recv_message))
         }
     }
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(val item = list[position]){
             is DateHeader ->{
@@ -84,15 +86,13 @@ class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentU
                     }
 
                    try {
-                       if(position == list.size-1){
-                           if(item.status == 2){
-                               messageStatus.text = "Seen"
-                           }
-                           else{
-                               messageStatus.text = "Delivered"
-                           }
-                       }else{
-                           messageStatus.visibility = View.GONE
+                       if(item.status == 2){
+                           read.visibility = View.VISIBLE
+                           unseen.visibility = View.GONE
+                       }
+                       else{
+                           read.visibility = View.GONE
+                           unseen.visibility = View.VISIBLE
                        }
                    }
                    catch (e:Exception){

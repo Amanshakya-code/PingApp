@@ -204,11 +204,12 @@ class ChatActivity : AppCompatActivity() {
                     }
 
                     override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                        Log.i("removed","change")
+                        Log.i("datachanged","change")
+                        chatAdapter.notifyDataSetChanged()
                     }
 
                     override fun onChildRemoved(snapshot: DataSnapshot) {
-
+                        chatAdapter.notifyDataSetChanged()
                     }
 
                     override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
@@ -270,16 +271,14 @@ class ChatActivity : AppCompatActivity() {
     private fun seenMessage(){
         getMessages(friendid!!).addValueEventListener(object: ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Log.i("datachanged","change")
                 for(snapshot in dataSnapshot.children){
                     val chats = snapshot.getValue(Message::class.java)
                     if (chats != null) {
-                        if(chats.senderId.equals(friendid) && chats.senderId.equals(mCurrentId)){
+                        if(chats.senderId == friendid){
                             var hashMap: HashMap<String, Any> = HashMap<String, Any>()
                             hashMap.put("status",2)
                             snapshot.ref.updateChildren(hashMap)
                         }
-
                     }
                 }
             }

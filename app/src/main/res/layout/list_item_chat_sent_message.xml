@@ -21,7 +21,6 @@
         android:clickable="true"
         android:elevation="0dp"
         app:cardBackgroundColor="#002366"
-        app:layout_constraintBottom_toTopOf="@+id/messageStatus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,20 +55,24 @@
                 android:textColor="#A6ffffff"
                 android:textSize="12sp"
                 tools:text="12:00 AM" />
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/read"
+                android:src="@drawable/read"
+                android:visibility="gone"
+                android:layout_marginStart="5dp"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/unseen"
+                android:src="@drawable/unseen"
+                android:layout_marginStart="5dp"
+                android:visibility="gone"
+                />
         </com.google.android.flexbox.FlexboxLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/messageStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="13dp"
-        android:textColor="#E6000000"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/materialCardView3"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
-        tools:text="Seen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
