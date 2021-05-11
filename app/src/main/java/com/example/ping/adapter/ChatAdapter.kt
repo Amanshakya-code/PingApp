@@ -1,5 +1,6 @@
 package com.example.ping.adapter
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.util.Log
@@ -12,6 +13,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.list_item_chat_recv_message.view.content
 import kotlinx.android.synthetic.main.list_item_chat_recv_message.view.time
+import kotlinx.android.synthetic.main.list_item_chat_sent_message.view.*
 import kotlinx.android.synthetic.main.list_item_date_header.view.*
 
 class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentUid:String):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -30,11 +32,12 @@ class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentU
                 MessageViewHolder(inflate(R.layout.list_item_chat_sent_message))
             }
             DATE_HEADER ->{
-                MessageViewHolder(inflate(R.layout.list_item_date_header))
+                DateViewHolder(inflate(R.layout.list_item_date_header))
             }
             else-> MessageViewHolder(inflate(R.layout.list_item_chat_recv_message))
         }
     }
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(val item = list[position]){
             is DateHeader ->{
@@ -82,6 +85,19 @@ class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentU
                         Log.i("erroe","$e")
                     }
 
+                   try {
+                       if(item.status == 2){
+                           read.visibility = View.VISIBLE
+                           unseen.visibility = View.GONE
+                       }
+                       else{
+                           read.visibility = View.GONE
+                           unseen.visibility = View.VISIBLE
+                       }
+                   }
+                   catch (e:Exception){
+                       Log.i("SMerror","error = $e")
+                   }
                 }
             }
         }
