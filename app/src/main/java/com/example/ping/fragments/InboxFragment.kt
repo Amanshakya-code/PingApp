@@ -42,7 +42,6 @@ class inboxFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-
         val baseQuery: Query =
                 mDatabase.reference.child("chats").child(auth.uid!!)
 
