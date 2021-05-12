@@ -58,7 +58,7 @@ class peopleFragment : Fragment() {
             }
 
             override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, model: User) {
-                if(holder is UserViewHolder)
+                if(holder is UserViewHolder) // we have to check bcz there is also emptyView Holder
                 {
                     holder.bind(user = model){ name: String, photo: String, id: String ->
                         val intent = Intent(requireContext(), ChatActivity::class.java)

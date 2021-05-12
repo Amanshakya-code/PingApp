@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ping.*
 import com.google.android.material.card.MaterialCardView
@@ -106,8 +107,6 @@ class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentU
         var msgtime = list.get(position).combineId
         var msgid = list.get(position).msgId
         FirebaseDatabase.getInstance().getReference("messages/$msgtime").child("$msgid").removeValue().addOnCompleteListener {
-            list.removeAt(position)
-            notifyItemRemoved(position)
         }
     }
     override fun getItemCount(): Int {

@@ -148,18 +148,6 @@ class ChatActivity : AppCompatActivity() {
         getInbox(mCurrentId!!,friendid!!).child("count").setValue(0)
     }
 
-    private fun updateMessage(msg: Message) {
-        val position = messages.indexOfFirst {
-            when (it) {
-                is Message -> it.msgId == msg.msgId
-                else -> false
-            }
-        }
-        messages[position] = msg
-
-        chatAdapter.notifyItemChanged(position)
-    }
-
     private fun sendMessage(msg: String) {
         val id = getMessages(friendid!!).push().key //uniquekey
         checkNotNull(id){
@@ -236,7 +224,10 @@ class ChatActivity : AppCompatActivity() {
                     }
 
                     override fun onChildRemoved(snapshot: DataSnapshot) {
-                        chatAdapter.notifyDataSetChanged()
+                        val message = snapshot.getValue(Message::class.java)
+                        if (message != null) {
+                            updateDeleteMessage(message)
+                        }
                     }
 
                     override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
@@ -248,6 +239,28 @@ class ChatActivity : AppCompatActivity() {
                     }
 
                 })
+    }
+
+    private fun updateDeleteMessage(message: Message) {
+        val position = messages.indexOfFirst {
+            when (it) {
+                is Message -> it.msgId == message.msgId
+                else -> false
+            }
+        }
+        messages.removeAt(position)
+        chatAdapter.notifyItemRemoved(position)
+    }
+    private fun updateMessage(msg: Message) {
+        val position = messages.indexOfFirst {
+            when (it) {
+                is Message -> it.msgId == msg.msgId
+                else -> false
+            }
+        }
+        messages[position] = msg
+
+        chatAdapter.notifyItemChanged(position)
     }
 
     private fun addMessages(msg: Message) {
@@ -315,4 +328,3 @@ class ChatActivity : AppCompatActivity() {
         })
     }
 }
-//simplychange

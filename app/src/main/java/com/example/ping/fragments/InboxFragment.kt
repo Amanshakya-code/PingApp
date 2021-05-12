@@ -61,8 +61,7 @@ class inboxFragment : Fragment() {
                     position: Int,
                     inbox: Inbox
             ) {
-
-                viewHolder.bind(inbox) { name: String, photo: String, id: String ->
+                viewHolder.bind(inbox = inbox) { name: String, photo: String, id: String ->
                     val intent = Intent(requireContext(), ChatActivity::class.java)
                     intent.putExtra(UID,id)
                     intent.putExtra(NAME,name)
