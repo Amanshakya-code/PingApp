@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:background="#CCCCFF"
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
@@ -22,6 +23,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:text="Verify Your Number"
+        android:textColor="#515151"
         android:textSize="20sp"
         android:textStyle="bold" />
     <TextView

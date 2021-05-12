@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#CCCCFF"
     android:gravity="center_horizontal"
     tools:context=".profileview">
 
@@ -27,6 +28,7 @@
         android:id="@+id/profilename"
         android:text="Name"
         android:layout_marginTop="50dp"
+        android:textColor="@color/black"
         android:textSize="30sp"
         />
     <com.google.android.material.button.MaterialButton
@@ -38,7 +40,6 @@
         android:layout_marginTop="15dp"
         android:padding="15dp"
         android:text="Edit Your Profile"
-        android:backgroundTint="#0B55A5"
         android:textAllCaps="true"
         android:textColor="#fff"
         android:textSize="16sp"
