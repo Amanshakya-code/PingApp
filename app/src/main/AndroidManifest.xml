@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ping">
+    package="com.example.ping" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,18 +14,22 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher_background"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ping">
-        <service android:name=".network.FirebaseService" android:permission="com.google.android.c2dm.permission.SEND">
+        android:theme="@style/Theme.Ping" >
+        <activity android:name=".Settings" android:parentActivityName=".MainActivity"/>
+        <service
+            android:name=".network.FirebaseService"
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
-        <activity android:name=".FriendProfileView"/>
+
+        <activity android:name=".FriendProfileView" />
         <activity android:name=".profileview" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/splashTheme">
+            android:theme="@style/splashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +40,9 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".OtpActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" android:launchMode="singleTop"/>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

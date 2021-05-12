@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/done/baseline_done_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/format_align_justify/baseline_format_align_justify_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -29,7 +29,8 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="unseen" />
+                            <entry key="opacityPercent" value="94" />
+                            <entry key="outputName" value="settingsicon" />
                             <entry key="sourceFile" value="C:\Users\AMAN\AndroidStudioProjects\Ping" />
                           </map>
                         </option>

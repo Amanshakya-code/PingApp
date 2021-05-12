@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.porfile-> {
-                startActivity(Intent(this,profileview::class.java))
+                startActivity(Intent(this,Settings::class.java))
                 return true
             }
         }
@@ -54,8 +54,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onlinestatus(status:String){
-
-
         val reference  = database.collection("users").document(mCurrentId!!)
         var hashMap: HashMap<String, Any> = HashMap<String, Any>()
         hashMap.put("onlineStatus",status)

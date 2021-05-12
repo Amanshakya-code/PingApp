@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/porfile"
-        app:showAsAction="never"
-        android:title="Edit Profile"
-        />
+        app:showAsAction="always"
+        android:icon="@drawable/settingsicon"
+        android:title="TODO" />
 </menu>
