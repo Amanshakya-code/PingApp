@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="#CCCCFF"
     tools:context=".FriendProfileView">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -28,7 +27,6 @@
         android:id="@+id/friendprofilename"
         android:text="Name"
         android:layout_marginTop="50dp"
-        android:textColor="@color/black"
         android:textSize="30sp"
         />
 </LinearLayout>

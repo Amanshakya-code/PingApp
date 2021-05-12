@@ -38,7 +38,6 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:lines="1"
-                android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="Aman kumar" />
@@ -49,7 +48,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:ellipsize="end"
-                android:textColor="@android:color/black"
                 android:textSize="14sp"
                 android:visibility="visible"
                 tools:text="6/1/20" />
