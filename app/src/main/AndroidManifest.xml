@@ -15,7 +15,6 @@
         android:roundIcon="@drawable/ic_launcher_background"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ping">
-
         <service android:name=".network.FirebaseService" android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
@@ -37,7 +36,7 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".OtpActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity" android:launchMode="singleTop"/>
     </application>
 
 </manifest>

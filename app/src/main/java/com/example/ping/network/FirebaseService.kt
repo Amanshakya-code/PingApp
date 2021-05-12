@@ -26,7 +26,6 @@ private const val CHANNEL_ID = "my_channel"
 class FirebaseService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-
         val intent = Intent(this,MainActivity::class.java)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationID = Random.nextInt()
@@ -59,5 +58,4 @@ class FirebaseService : FirebaseMessagingService() {
         }
         notificationManager.createNotificationChannel(channel)
     }
-
 }

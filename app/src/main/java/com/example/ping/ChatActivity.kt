@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.properties.Delegates
 
 const val UID = "uid"
 const val NAME = "name"
@@ -38,6 +39,7 @@ class ChatActivity : AppCompatActivity() {
     private var name:String?= ""
     private var image:String?=""
     private var mCurrentId:String?=""
+    var notificationCounter by Delegates.notNull<Boolean>()
     private val db: FirebaseDatabase by lazy {
         FirebaseDatabase.getInstance()
     }
@@ -80,6 +82,12 @@ class ChatActivity : AppCompatActivity() {
             value?.let {
                 if(it.exists()){
                     val onlineState = it.getString("onlineStatus")
+                    if(onlineState.equals("online")){
+                        notificationCounter = false
+                    }
+                    else{
+                        notificationCounter = true
+                    }
                     onlinestatus.text = onlineState
                 }
             }
@@ -165,7 +173,8 @@ class ChatActivity : AppCompatActivity() {
         val messagetobesend = msg
         val friendToken = friendUser.deviceToken
         Log.i("details","$currentusername------$messagetobesend-------$friendToken")
-        if(currentusername.isNotEmpty()&&messagetobesend.isNotEmpty()&&friendToken.isNotEmpty()){
+        Log.i("mcounter","$notificationCounter")
+        if(currentusername.isNotEmpty()&&messagetobesend.isNotEmpty()&&friendToken.isNotEmpty()&&notificationCounter){
             PushNotification(
                 NotificationData(currentusername,messagetobesend),
                 friendToken
