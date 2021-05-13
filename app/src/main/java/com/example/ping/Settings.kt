@@ -10,13 +10,38 @@ import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.Toast
 import com.example.ping.adapter.settingAdapter
+import com.example.ping.models.User
 import com.example.ping.models.settingitem
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_profileview.*
+import kotlinx.android.synthetic.main.activity_settings.*
+import java.lang.Exception
 
 class Settings : AppCompatActivity() {
 
+    lateinit var currentUserprofile: User
+    private var mCurrentId:String?=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+        mCurrentId = FirebaseAuth.getInstance().uid!!
+        FirebaseFirestore.getInstance().collection("users").document(mCurrentId!!).get().addOnSuccessListener {
+            currentUserprofile = it.toObject(User::class.java)!!
+            // Log.i("fault",currentUserprofile.toString())
+            Picasso.get().load(currentUserprofile.imageUrl).into(settingUserImage,object: com.squareup.picasso.Callback{
+                override fun onSuccess() {
+                    settingPbar.visibility = View.GONE
+                }
+
+                override fun onError(e: Exception?) {
+                    settingPbar.visibility = View.GONE
+                }
+
+            })
+            settingUserName.text = currentUserprofile.name
+        }
 
         var listView = findViewById<ListView>(R.id.listview)
         var list = mutableListOf<settingitem>()

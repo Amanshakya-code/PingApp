@@ -69,9 +69,7 @@ class peopleFragment : Fragment() {
                     }
                 }
                 else
-                {
-
-                }
+                { }
             }
 
             override fun onError(e: Exception) {

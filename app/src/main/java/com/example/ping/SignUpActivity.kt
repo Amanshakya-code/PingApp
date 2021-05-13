@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 
 import androidx.annotation.RequiresApi
@@ -126,6 +127,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun uploadImage(it: Uri) {
         Toast.makeText(this,"Please wait your data is uploading",Toast.LENGTH_LONG).show()
+        signupprogressBar.visibility = View.VISIBLE
         nextBtn.isEnabled = false // no intererruption in uploading the image
         val ref = storage.reference.child("uploads/"+auth.uid.toString())
         val uploadTask = ref.putFile(it)
@@ -139,6 +141,7 @@ class SignUpActivity : AppCompatActivity() {
             return@Continuation ref.downloadUrl
         }).addOnCompleteListener {task->
             Toast.makeText(this,"There your go :)",Toast.LENGTH_SHORT).show()
+            signupprogressBar.visibility = View.GONE
             nextBtn.isEnabled = true
             if (task.isSuccessful)
             {
