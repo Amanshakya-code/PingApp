@@ -14,6 +14,6 @@
     <string name="sunday">Sunday</string>
     <string name="like_message">Like message</string>
     <string name="welcome_to_whatsapp">Welcome to Whatsapp</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alertcontent">This Chatting Application implemented with firebase as backend,provides a real-time chat experience between two users.\n The app contains a bunch of features like Phone Authentication,Realtime database,Firebase cloud messaging,user presence,chat status, and many</string>
 </resources>

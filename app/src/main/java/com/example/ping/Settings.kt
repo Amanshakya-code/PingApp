@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
@@ -57,13 +58,21 @@ class Settings : AppCompatActivity() {
                 startActivity(Intent(this,profileview::class.java))
             }
             if(position == 1){
-                Toast.makeText(this,"this is notification",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Notification",Toast.LENGTH_SHORT).show()
             }
             if(position == 2){
-                Toast.makeText(this,"this is privacy",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"privacy rules",Toast.LENGTH_SHORT).show()
             }
             if(position == 3){
-                Toast.makeText(this,"this is about us",Toast.LENGTH_SHORT).show()
+                val inflater = LayoutInflater.from(this)
+                val view = inflater.inflate(R.layout.alert_dialog,null)
+                val alertDialog = androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setView(view)
+                    .setCancelable(true)
+                    .setPositiveButton("Thanks for using this App"){dialogInterface,which->
+                    }
+                    .create()
+                alertDialog.show()
             }
             if(position == 4){
                 var dialogBuilder = AlertDialog.Builder(this)

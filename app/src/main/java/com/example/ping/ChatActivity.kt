@@ -71,8 +71,6 @@ class ChatActivity : AppCompatActivity() {
         }
         FirebaseFirestore.getInstance().collection("users").document(friendid!!).get().addOnSuccessListener {
             friendUser = it.toObject(User::class.java)!!
-
-
         }
         FirebaseFirestore.getInstance().collection("users").document(friendid!!).addSnapshotListener { value, error ->
             error?.let {
