@@ -19,9 +19,11 @@ class settingAdapter (var context:Activity,var items:List<settingitem>):ArrayAda
         var view = LayoutInflater.from(context).inflate(R.layout.setting_single_item,null)
         val image = view.findViewById<ImageView>(R.id.settingicon)
         val text = view.findViewById<TextView>(R.id.settingTxt)
+        val supporttext = view.findViewById<TextView>(R.id.supporttext)
         var mItem:settingitem = items[position]
         image.setImageDrawable(context.resources.getDrawable(mItem.image))
         text.text = mItem.text
+        supporttext.text = mItem.supporttext
         return view
     }
 }

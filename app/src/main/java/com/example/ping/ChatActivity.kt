@@ -121,7 +121,7 @@ class ChatActivity : AppCompatActivity() {
             }
 
         }
-        updateReadCount()
+
         seenMessage()
 
     }
@@ -169,6 +169,7 @@ class ChatActivity : AppCompatActivity() {
             }
         }
         updateLastMessage(msgMap)
+        updateReadCount()
     }
 
     private fun updateLastMessage(message: Message) {

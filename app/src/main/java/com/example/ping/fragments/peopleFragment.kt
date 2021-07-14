@@ -40,8 +40,8 @@ class peopleFragment : Fragment() {
 
     private fun setupAdapter() {
         val config = PagedList.Config.Builder()
-            .setPrefetchDistance(2) // number of pages you want initally
-            .setPageSize(10)
+            .setPrefetchDistance(1) // number of pages you want initally
+            .setPageSize(1)
             .setEnablePlaceholders(false)
             .build()
         val options = FirestorePagingOptions.Builder<User>()
@@ -81,15 +81,18 @@ class peopleFragment : Fragment() {
                 when(state)
                 {
                     LoadingState.LOADING_INITIAL -> {
+                        shimmershow()
                     }
 
                     LoadingState.LOADING_MORE -> {
                     }
 
                     LoadingState.LOADED -> {
+                        shimmerhide()
                     }
 
                     LoadingState.ERROR -> {
+                        shimmerhide()
                         Toast.makeText(
                             requireContext(),
                             "Error Occurred!",
@@ -98,6 +101,7 @@ class peopleFragment : Fragment() {
                     }
 
                     LoadingState.FINISHED -> {
+                        shimmerhide()
                     }
                 }
             }
@@ -122,5 +126,14 @@ class peopleFragment : Fragment() {
             adapter = mAdapter
         }
 
+
+    }
+    fun shimmerhide(){
+        shimmer.stopShimmer()
+        shimmer.visibility = View.GONE
+    }
+    fun shimmershow(){
+        shimmer.startShimmer()
+        shimmer.visibility = View.VISIBLE
     }
 }

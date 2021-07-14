@@ -1,13 +1,19 @@
 package com.example.ping
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.example.ping.adapter.FragmentViewPagerAdapter
 import com.example.ping.adapter.ScreenSlideAdapter
+import com.example.ping.fragments.UserProfile
+import com.example.ping.fragments.inboxFragment
+import com.example.ping.fragments.peopleFragment
 import com.example.ping.models.User
+import com.fxn.OnBubbleClickListener
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
@@ -25,33 +31,38 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        window.statusBarColor = Color.WHITE
         mCurrentId = FirebaseAuth.getInstance().uid!!
-        //setup the toolbar
-        setSupportActionBar(toolbar)
-        viewPager.adapter = ScreenSlideAdapter(this)
-        TabLayoutMediator(tabs,viewPager,TabLayoutMediator.TabConfigurationStrategy{ tab: TabLayout.Tab, position: Int ->
-            when(position){
-                0->tab.text = "Chats"
-                1->tab.text = "People"
+
+        val chatfragment = inboxFragment()
+        val peoplefragment = peopleFragment()
+        val profileView = UserProfile()
+
+        val viewPagerAdapter = FragmentViewPagerAdapter(supportFragmentManager)
+        viewPagerAdapter.addFragment(chatfragment)
+        viewPagerAdapter.addFragment(peoplefragment)
+        viewPagerAdapter.addFragment(profileView)
+        //Setting Adapter To Viewpager
+        fragmentViewPager.adapter = viewPagerAdapter
+
+        //Setting default Fragment
+        fragmentViewPager.currentItem = 0
+        //Setting Viewpager To TabBar
+        bottomTabBar.setupBubbleTabBar(viewPager = fragmentViewPager)
+        bottomTabBar.isFocusableInTouchMode = true
+        bottomTabBar.touchscreenBlocksFocus = true
+        bottomTabBar.addBubbleListener(object : OnBubbleClickListener {
+            override fun onBubbleClick(id: Int) {
+                when (id) {
+                    R.id.chattingFragment -> fragmentViewPager.currentItem = 0
+                    R.id.peopleFragment -> fragmentViewPager.currentItem = 1
+                    R.id.userprofile -> fragmentViewPager.currentItem = 2
+                }
             }
-        }).attach()
+        })
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        var inflater = menuInflater
-        inflater.inflate(R.menu.first_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.porfile-> {
-                startActivity(Intent(this,Settings::class.java))
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     private fun onlinestatus(status:String){
         val reference  = database.collection("users").document(mCurrentId!!)

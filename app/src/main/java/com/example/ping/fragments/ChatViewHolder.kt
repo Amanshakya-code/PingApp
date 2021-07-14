@@ -19,11 +19,19 @@ class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
                 titleTv.text = inbox.name
                 subTitleTv.text = inbox.msg
-                Picasso.get()
+                if(inbox.image.isEmpty())
+                {
+                    userImgView.setImageResource(R.drawable.defaultavatar)
+                }
+                else
+                {
+                    Picasso.get()
                         .load(inbox.image)
                         .placeholder(R.drawable.defaultavatar)
                         .error(R.drawable.defaultavatar)
                         .into(userImgView)
+                }
+
                 setOnClickListener {
                     onClick.invoke(inbox.name, inbox.image, inbox.from)
                 }
