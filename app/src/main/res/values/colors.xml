@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
+    <color name="action_bar_color">#FF4B5C</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
@@ -11,4 +12,8 @@
     <color name="green">#9CE34A</color>
     <color name="light_grey">#E0E0E0</color>
     <color name="view_border">#E0E0E0</color>
+    <color name="darkback">#80000000</color>
+    <color name="text_box_color">#F1F5F9</color>
+    <color name="button_color">#056674</color>
+    <color name="status_bar_color">#C50033</color>
 </resources>

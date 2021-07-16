@@ -33,6 +33,7 @@ import kotlin.properties.Delegates
 const val UID = "uid"
 const val NAME = "name"
 const val IMAGE = "photo"
+const val STATUS = "status"
 const val TOPIC = "/topics/mytopic"
 class ChatActivity : AppCompatActivity() {
     private var friendid:String? =""
@@ -101,8 +102,7 @@ class ChatActivity : AppCompatActivity() {
         Picasso.get().load(image).into(userImgView)
         nameTv.setOnClickListener {
             val intent = Intent(this,FriendProfileView::class.java)
-            intent.putExtra(NAME,name)
-            intent.putExtra(IMAGE,image)
+            intent.putExtra(NAME,friendid)
             startActivity(intent)
         }
 

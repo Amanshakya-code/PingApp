@@ -4,32 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     tools:context=".EditProfile">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/profilePhoto"
-        android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:src="@drawable/ic_baseline_person_24"
-        android:layout_margin="10dp"
-        android:layout_marginTop="50dp"
-        android:scaleType="centerCrop"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/imageholder"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/changeImage"
-        android:backgroundTint="@color/purple_200"
-       android:src="@drawable/ic_baseline_camera_alt_24"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/profilePhoto"/>
+        android:background="@drawable/circular_dotted_line"
+        android:gravity="center">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="180dp"
+            android:id="@+id/cardview"
+            android:layout_height="180dp"
+            android:padding="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            card_view:cardCornerRadius="180dp"
+            card_view:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profilePhoto"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@color/action_bar_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/profilenametext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:textColor="@color/white"
+                    android:textSize="100sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="T" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/changeImage"
+            android:backgroundTint="@color/status_bar_color"
+            android:src="@drawable/ic_baseline_camera_alt_24"
+            app:layout_constraintBottom_toBottomOf="@+id/cardview"
+            app:layout_constraintRight_toRightOf="parent"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/deleteImage"
+            android:visibility="gone"
+            android:src="@drawable/closeimage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/profilePhoto"
+        app:layout_constraintTop_toBottomOf="@+id/imageholder"
         android:id="@+id/firstrow"
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -54,9 +113,13 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="20dp"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:id="@+id/Editname"
+        android:background="@color/text_box_color"
+        android:backgroundTint="@color/text_box_color"
+        android:paddingLeft="10dp"
         android:textSize="18sp"
-        android:hint="eg: Aman"
+        android:hint="  eg: Aman"
         android:layout_marginTop="5dp"
         app:layout_constraintTop_toBottomOf="@+id/firstrow"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -94,10 +157,15 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:id="@+id/editstatus"
+        android:paddingLeft="10dp"
+        android:maxLength="60"
         android:layout_marginRight="20dp"
         android:textSize="18sp"
-        android:hint="eg: Hey i am Using Ping"
+        android:hint="  eg: Hey i am Using Ping"
+        android:background="@color/text_box_color"
+        android:backgroundTint="@color/text_box_color"
         android:layout_marginTop="5dp"
         app:layout_constraintTop_toBottomOf="@+id/secondrow"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -117,7 +185,7 @@
         android:letterSpacing="0.08"
         android:text="Done"
         android:textAllCaps="false"
-        android:textColor="#6c63ff"
+        android:textColor="@color/action_bar_color"
         android:textSize="15sp"
         android:visibility="visible"
         app:backgroundTint="@color/white"
@@ -127,7 +195,28 @@
         app:layout_constraintStart_toStartOf="parent"
        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:strokeColor="#6c63ff"
+        app:strokeColor="@color/action_bar_color"
         app:strokeWidth="1.5dp" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loadblacksaved"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/darkback"
+        app:cardElevation="0dp" >
+
+        <ProgressBar
+            android:id="@+id/savedprogressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:indeterminateTint="@color/white"
+            android:visibility="gone" />
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

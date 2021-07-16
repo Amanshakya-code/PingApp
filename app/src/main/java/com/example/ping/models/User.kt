@@ -15,5 +15,5 @@ data class User(
         // when we make a data class for the firebase we always make empty constructor
 ): Serializable {
     constructor():this("","","","","","", "")
-    constructor(name: String,imageUrl: String,thumbImage: String,uid: String,deviceToken: String,onlineStatus: String):this(name,imageUrl,thumbImage,uid,deviceToken,"Hey there i am using Ping",onlineStatus)
+    //constructor(name: String,imageUrl: String,thumbImage: String,uid: String,deviceToken: String,status:String,onlineStatus: String):this(name,imageUrl,thumbImage,uid,deviceToken,status,onlineStatus)
 }

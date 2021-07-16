@@ -4,16 +4,16 @@
     <item
         android:id="@+id/chattingFragment"
         android:title="Chats"
-        android:iconTint="@color/purple_200"
+        android:iconTint="@color/action_bar_color"
         android:icon="@drawable/ic_baseline_chat_24"/>
     <item
         android:id="@+id/peopleFragment"
         android:title="Peoples"
         android:icon="@drawable/ic_baseline_people_24"
-        android:iconTint="@color/purple_200"/>
+        android:iconTint="@color/action_bar_color"/>
     <item
         android:id="@+id/userprofile"
         android:title="Profile"
         android:icon="@drawable/ic_baseline_person_24"
-        android:iconTint="@color/purple_200"/>
+        android:iconTint="@color/action_bar_color"/>
 </menu>

@@ -42,18 +42,16 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-        userImgView.setOnClickListener {
+        downloadURL = ""
+        changesignupimage.setOnClickListener {
             checkPermissionForImage()
         }
         nextBtn.setOnClickListener {
-            nextBtn.isEnabled = false
-            val name = nameEt.text.toString()
+            val name = nameedit.text.toString()
+            val status = status.text.toString()
             if (name.isEmpty())
             {
                 Toast.makeText(this,"Name cannot be empty!!",Toast.LENGTH_SHORT).show()
-            }
-            else if (!::downloadURL.isInitialized){
-                Toast.makeText(this,"Image cannot be empty!!",Toast.LENGTH_SHORT).show()
             }
             else
             {
@@ -64,7 +62,7 @@ class SignUpActivity : AppCompatActivity() {
                     // Get new FCM registration token
                     var token = task.result.toString()
 
-                    val user = User(name,downloadURL,downloadURL,auth.uid!!,token,"online")
+                    val user = User(name,downloadURL,downloadURL,auth.uid!!,token,status,"online")
                     database.collection("users").document(auth.uid!!).set(user).addOnSuccessListener {
                         startActivity(Intent(this,MainActivity::class.java))
                         finish()
@@ -74,6 +72,11 @@ class SignUpActivity : AppCompatActivity() {
                     Log.i("token",token)
                 })
             }
+        }
+        deleteImageurl.setOnClickListener {
+            downloadURL = ""
+            signupprofile.setImageResource(R.drawable.defaultavatar)
+            deleteImageurl.visibility = View.GONE
         }
     }
 
@@ -114,7 +117,7 @@ class SignUpActivity : AppCompatActivity() {
         {
             //this will store the path for the image
             data?.data?.let{
-                userImgView.setImageURI(it)
+                signupprofile.setImageURI(it)
                 uploadImage(it)
             }
         }
@@ -126,8 +129,9 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun uploadImage(it: Uri) {
+        deleteImageurl.visibility = View.VISIBLE
         Toast.makeText(this,"Please wait your data is uploading",Toast.LENGTH_LONG).show()
-        signupprogressBar.visibility = View.VISIBLE
+        showbar()
         nextBtn.isEnabled = false // no intererruption in uploading the image
         val ref = storage.reference.child("uploads/"+auth.uid.toString())
         val uploadTask = ref.putFile(it)
@@ -141,7 +145,7 @@ class SignUpActivity : AppCompatActivity() {
             return@Continuation ref.downloadUrl
         }).addOnCompleteListener {task->
             Toast.makeText(this,"There your go :)",Toast.LENGTH_SHORT).show()
-            signupprogressBar.visibility = View.GONE
+            hidebar()
             nextBtn.isEnabled = true
             if (task.isSuccessful)
             {
@@ -152,7 +156,17 @@ class SignUpActivity : AppCompatActivity() {
 
             }
         }.addOnFailureListener{
+            deleteImageurl.visibility = View.GONE
+            hidebar()
             Toast.makeText(this,"Not able to upload the image",Toast.LENGTH_SHORT).show()
         }
+    }
+    private fun showbar(){
+        signupbackload.visibility = View.VISIBLE
+        signuploadingbar.visibility = View.VISIBLE
+    }
+    private fun hidebar(){
+        signupbackload.visibility = View.GONE
+        signuploadingbar.visibility = View.GONE
     }
 }

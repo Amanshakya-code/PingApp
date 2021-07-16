@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/auto_awesome/baseline_auto_awesome_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/highlight_off/baseline_highlight_off_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,9 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="e73030" />
-                            <entry key="opacityPercent" value="89" />
-                            <entry key="outputName" value="ic_baseline_auto_awesome_24" />
+                            <entry key="opacityPercent" value="69" />
+                            <entry key="outputName" value="closeimage" />
                             <entry key="sourceFile" value="C:\Users\AMAN\AndroidStudioProjects\Ping" />
                           </map>
                         </option>

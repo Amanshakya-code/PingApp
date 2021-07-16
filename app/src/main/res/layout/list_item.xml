@@ -10,16 +10,31 @@
     android:id="@+id/selectView"
     android:orientation="horizontal"
     android:padding="10dp">
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/userImgView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:adjustViewBounds="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/defaultavatar"
-        app:shapeAppearanceOverlay="@style/RoundedImageViewSmall" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/userImgView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="centerCrop"
+            android:src="@color/action_bar_color"
+            app:shapeAppearanceOverlay="@style/RoundedImageViewSmall" />
+        <TextView
+            android:id="@+id/textname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:visibility="gone"
+            android:textColor="@color/white"/>
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,6 +96,7 @@
                 android:textSize="14sp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:textStyle="bold"
                 android:paddingBottom="2dp"
                 android:paddingTop="2dp"
                 android:visibility="visible"

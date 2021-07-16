@@ -1,16 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.inboxFragment">
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer"
+
+
+    <ImageView
+        android:id="@+id/nochatfound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/onboarding3"
+        android:layout_marginTop="96dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nochattxt"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/nochatfound"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Start Your First Chat"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="7dp"
+        />
+    <com.google.android.material.button.MaterialButton
+        app:layout_goneMarginTop="10dp"
+        android:id="@+id/explorechat"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:elevation="5dp"
+        android:fontFamily="@font/roboto_medium"
+        android:letterSpacing="0.08"
+        android:text="Connect With People"
+        android:textAllCaps="false"
+        android:textColor="@color/action_bar_color"
+        android:textSize="15sp"
+        android:visibility="gone"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="3dp"
+        app:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="20dp"
+        app:strokeColor="@color/action_bar_color"
+        app:layout_constraintTop_toBottomOf="@+id/nochattxt"
+        app:strokeWidth="1.5dp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:listitem="@layout/list_item" />
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
         app:shimmer_duration="1000">
 
         <LinearLayout
@@ -45,16 +108,7 @@
             <include layout="@layout/shimmer_layout" />
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeTorefreshpeople"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/list_item"/>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

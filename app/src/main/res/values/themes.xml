@@ -2,17 +2,16 @@
     <!-- Base application theme. -->
     <style name="Theme.Ping" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#2D5DA1</item>
-        <item name="colorPrimaryVariant">#004F98</item>
+        <item name="colorPrimary">@color/action_bar_color</item>
+        <item name="colorPrimaryVariant">@color/status_bar_color</item>
+        <item name="colorPrimaryDark">@color/status_bar_color</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/purple_500</item>
         <item name="colorSecondaryVariant">@color/purple_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowLightStatusBar">true</item>
+
         <!-- Customize your theme here. -->
     </style>
     <style name="RoundedImageView">
@@ -33,14 +32,9 @@
         <item name="cornerSizeBottomRight">8dp</item>
         <item name="cornerSizeTopRight">22dp</item>
     </style>
-    <style name="splashTheme" parent="Theme.AppCompat">
-        <item name="android:windowFullscreen">true</item>
+    <style name="splashTheme" parent="Theme.MaterialComponents">
         <item name="android:windowBackground">@drawable/splash</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/status_bar_color</item>
     </style>
     <style name="RoundedImageViewSmall">
         <item name="cornerFamily">rounded</item>

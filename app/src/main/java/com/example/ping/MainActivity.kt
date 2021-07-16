@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        window.statusBarColor = Color.WHITE
+       // window.statusBarColor = Color.WHITE
         mCurrentId = FirebaseAuth.getInstance().uid!!
 
         val chatfragment = inboxFragment()
@@ -44,11 +44,12 @@ class MainActivity : AppCompatActivity() {
         viewPagerAdapter.addFragment(profileView)
         //Setting Adapter To Viewpager
         fragmentViewPager.adapter = viewPagerAdapter
-
+        fragmentViewPager.setOffscreenPageLimit(2);
         //Setting default Fragment
-        fragmentViewPager.currentItem = 0
         //Setting Viewpager To TabBar
         bottomTabBar.setupBubbleTabBar(viewPager = fragmentViewPager)
+        fragmentViewPager.currentItem = 0
+        bottomTabBar.setSelected(0,false)
         bottomTabBar.isFocusableInTouchMode = true
         bottomTabBar.touchscreenBlocksFocus = true
         bottomTabBar.addBubbleListener(object : OnBubbleClickListener {
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.userprofile -> fragmentViewPager.currentItem = 2
                 }
             }
+
         })
 
     }
@@ -81,6 +83,11 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         onlinestatus("offline")
     }
+    fun viewpagerspecific()
+    {
+        fragmentViewPager.setCurrentItem(1)
+    }
+
 
 }
 

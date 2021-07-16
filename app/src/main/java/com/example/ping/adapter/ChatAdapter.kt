@@ -50,7 +50,7 @@ class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentU
                     time.text = item.sendAt.formatAsTime()
                     try{
                         messagesendlayout = findViewById(R.id.materialCardView3)
-                        messagesendlayout?.setOnClickListener {
+                        messagesendlayout?.setOnLongClickListener {
                             var dialogBuilder = AlertDialog.Builder(context)
                             dialogBuilder.setTitle("Delete")
                             dialogBuilder.setMessage("Are you sure to delete this message ?")
@@ -63,6 +63,7 @@ class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentU
                                     })
                             val alert = dialogBuilder.create()
                             alert.show()
+                            return@setOnLongClickListener true
                         }
                     }catch (e:Exception)
                     {
@@ -70,7 +71,7 @@ class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentU
                     }
                     try {
                         messagerecvlayout = findViewById(R.id.messageCardView)
-                        messagerecvlayout?.setOnClickListener {
+                        messagerecvlayout?.setOnLongClickListener {
                             var dialogBuilder = AlertDialog.Builder(context)
                             dialogBuilder.setTitle("Sorry")
                             dialogBuilder.setMessage("You can only delete your own messages !")
@@ -80,6 +81,7 @@ class ChatAdapter(private val list:MutableList<ChatEvent>, private val mCurrentU
                                     })
                             val alert = dialogBuilder.create()
                             alert.show()
+                            return@setOnLongClickListener true
                         }
                     }catch (e:Exception)
                     {

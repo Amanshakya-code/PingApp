@@ -16,11 +16,11 @@
         android:id="@+id/materialCardView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="2dp"
         android:clickable="true"
         android:elevation="0dp"
-        app:cardBackgroundColor="#002366"
+        app:cardBackgroundColor="#FFD3D7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="5dp"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="14sp"
                 tools:text="Hello" />
 
@@ -52,7 +52,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:textColor="#A6ffffff"
                 android:textSize="12sp"
                 tools:text="12:00 AM" />
             <ImageView
