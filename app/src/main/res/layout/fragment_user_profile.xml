@@ -109,7 +109,6 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:id="@+id/settingListView"
-
        tools:listitem="@layout/setting_single_item"
       />
 </androidx.constraintlayout.widget.ConstraintLayout>

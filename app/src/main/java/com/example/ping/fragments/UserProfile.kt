@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import com.example.ping.EditProfile
+import com.example.ping.LoginActivity
 import com.example.ping.MainActivity
 import com.example.ping.R
 import com.example.ping.adapter.settingAdapter
@@ -116,6 +117,9 @@ class UserProfile : Fragment(R.layout.fragment_user_profile) {
                     .setCancelable(true)
                     .setPositiveButton("Logout", DialogInterface.OnClickListener(){
                             dialog, which -> dialog.dismiss()
+                        val intent = Intent(requireContext(),LoginActivity::class.java)
+                        startActivity(intent)
+                        (activity as MainActivity).finish()
                     })
                     .setNegativeButton("cancel", DialogInterface.OnClickListener(){
                             dialog, which -> dialog.dismiss()
